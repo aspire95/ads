@@ -1,0 +1,14 @@
+{
+  "requests": {
+    "mean": 8100.19,
+    "total": 89106
+  },
+  "latency": {
+    "mean": 0.72,
+    "p99": 3
+  },
+  "throughput": {
+    "mean": 3280430.55,
+    "total": 36087930
+  }
+}

@@ -1,0 +1,31 @@
+<div class="container animate-fade-in">
+  <div class="dashboard-header glass-card" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+    <div>
+      <h2 style="margin-bottom: 0.5rem">Student MIS</h2>
+      <p style="color: var(--text-secondary); margin: 0;">Welcome, {{ user?.username || 'User' }}</p>
+    </div>
+    <button (click)="logout()" class="btn-danger">Logout</button>
+  </div>
+
+  <div class="dashboard-grid">
+    <a routerLink="/students" class="glass-card nav-card">
+      <h3>Manage Students</h3>
+      <p>View, Add, Edit, Delete Students</p>
+    </a>
+    
+    <a routerLink="/departments" class="glass-card nav-card">
+      <h3>Departments</h3>
+      <p>Manage University Departments</p>
+    </a>
+    
+    <a routerLink="/users" class="glass-card nav-card">
+      <h3>Users</h3>
+      <p>Manage System Access</p>
+    </a>
+    
+    <a routerLink="/reports" class="glass-card nav-card">
+      <h3>Reports</h3>
+      <p>Generate & View Reports</p>
+    </a>
+  </div>
+</div>

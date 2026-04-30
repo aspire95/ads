@@ -1,0 +1,17 @@
+{
+  "name": "assignment05-benchmark",
+  "version": "1.0.0",
+  "description": "Benchmarking suite for Assignment 3 and 4",
+  "main": "index.js",
+  "scripts": {
+    "test:ass3": "node benchmark_ass3.js",
+    "test:ass4": "node benchmark_ass4.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "autocannon": "^7.15.0",
+    "node-fetch": "^2.7.0"
+  }
+}

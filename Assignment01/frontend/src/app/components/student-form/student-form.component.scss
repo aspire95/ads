@@ -1,0 +1,246 @@
+// Variables
+$primary-color: #6366f1; // Indigo
+$primary-hover: #4f46e5;
+$bg-color: #f3f4f6;
+$card-bg: #ffffff;
+$text-main: #111827;
+$text-secondary: #6b7280;
+$border-color: #e5e7eb;
+$input-bg: #f9fafb;
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+.student-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+.card {
+  background: $card-bg;
+  border-radius: 1rem;
+  box-shadow: $shadow-lg;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  
+  &-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid $border-color;
+    
+    h2 {
+      margin: 0;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: $text-main;
+    }
+    
+    p {
+      margin: 0.5rem 0 0;
+      color: $text-secondary;
+      font-size: 0.875rem;
+    }
+  }
+}
+
+.form-card {
+  flex: 1;
+  min-width: 300px;
+}
+
+.list-card {
+  flex: 2;
+  min-width: 300px;
+}
+
+.student-form {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: $text-main;
+  }
+
+  input {
+    padding: 0.75rem 1rem;
+    border: 1px solid $border-color;
+    border-radius: 0.5rem;
+    background-color: $input-bg;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+      box-shadow: 0 0 0 3px rgba($primary-color, 0.1);
+      background-color: #fff;
+    }
+    
+    &::placeholder {
+      color: #9ca3af;
+    }
+  }
+}
+
+.btn-submit {
+  margin-top: 1rem;
+  padding: 0.875rem;
+  background-color: $primary-color;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover:not(:disabled) {
+    background-color: $primary-hover;
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}
+
+.btn-cancel {
+  padding: 0.875rem;
+  background-color: transparent;
+  color: $text-secondary;
+  border: 1px solid $border-color;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: $bg-color;
+    color: $text-main;
+  }
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.student-table {
+  width: 100%;
+  border-collapse: collapse;
+  
+  th {
+    background-color: $input-bg;
+    padding: 1rem;
+    text-align: left;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: $text-secondary;
+    letter-spacing: 0.05em;
+  }
+  
+  td {
+    padding: 1rem;
+    border-top: 1px solid $border-color;
+    font-size: 0.9rem;
+    color: $text-main;
+  }
+  
+  .student-name {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 500;
+    
+    .avatar {
+      width: 2rem;
+      height: 2rem;
+      background-color: rgba($primary-color, 0.1);
+      color: $primary-color;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+  }
+  
+  .prn-cell {
+    font-family: monospace;
+    color: $text-secondary;
+  }
+  
+  .date-cell {
+    color: $text-secondary;
+    font-size: 0.85rem;
+  }
+
+  .actions-cell {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .btn-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid $border-color;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 1.1rem;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: $shadow-sm;
+    }
+
+    &.btn-edit {
+      color: $primary-color;
+      &:hover {
+        background-color: rgba($primary-color, 0.05);
+        border-color: $primary-color;
+      }
+    }
+
+    &.btn-delete {
+      color: #ef4444; // Red
+      &:hover {
+        background-color: rgba(#ef4444, 0.05);
+        border-color: #ef4444;
+      }
+    }
+
+    i {
+      font-style: normal;
+    }
+  }
+  
+  .empty-row td {
+    text-align: center;
+    padding: 3rem;
+    color: $text-secondary;
+  }
+}

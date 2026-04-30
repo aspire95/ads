@@ -1,0 +1,309 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x0000000010014ed4, pid=23532, tid=0x00000000000073a4
+#
+# JRE version: Java(TM) SE Runtime Environment (8.0_481) (build 1.8.0_481-b10)
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (25.481-b10 mixed mode windows-amd64 compressed oops)
+# Problematic frame:
+# C  [sigar-amd64-winnt.dll+0x14ed4]
+#
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+# If you would like to submit a bug report, please visit:
+#   https://bugreport.java.com/bugreport/crash.jsp
+# The crash happened outside the Java Virtual Machine in native code.
+# See problematic frame for where to report the bug.
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x000001fc32d51420):  JavaThread "main" [_thread_in_native, id=29604, stack(0x0000009042340000,0x0000009042380000)]
+
+siginfo: ExceptionCode=0xc0000005, reading address 0x00000000500c9f28
+
+Registers:
+RAX=0x00000000500c9df0, RBX=0x000001fc5031e3a0, RCX=0x000001fc32d51620, RDX=0x000000904237e9a8
+RSP=0x000000904237e7d0, RBP=0x000000904237e988, RSI=0x000001fc4d0e0468, RDI=0x0000000000141aa0
+R8 =0x0000000000000032, R9 =0x00000006c9ee71d8, R10=0x000000000000001e, R11=0x00007ff90d641cec
+R12=0x0000000000000000, R13=0x000001fc5031e398, R14=0x000000904237e9a8, R15=0x000001fc32d51420
+RIP=0x0000000010014ed4, EFLAGS=0x0000000000010206
+
+Top of Stack: (sp=0x000000904237e7d0)
+0x000000904237e7d0:   000001fc32d51620 000000904237e9a8
+0x000000904237e7e0:   0000000000000000 0000000000141aa0
+0x000000904237e7f0:   00000000500c9df0 000001fc32d51420
+0x000000904237e800:   000000904237e988 0000000010021a81
+0x000000904237e810:   000001fc32d51620 000000904237e9a8
+0x000000904237e820:   000001fc5031e3a0 000001fc5031e3a0
+0x000000904237e830:   000001fc32d51420 0000000000000000
+0x000000904237e840:   000001fc32d51420 000001fc32d51420
+0x000000904237e850:   000001fc32df6828 000001fc5031e398
+0x000000904237e860:   000001fc5031e3a0 0000000000000000
+0x000000904237e870:   000001fc32d51420 0000000000000000
+0x000000904237e880:   000000904237e988 00007ff90cee5972
+0x000000904237e890:   000000904237e8c0 000001fc32d51420
+0x000000904237e8a0:   000001fc5031e3a0 000001fc32d51810
+0x000000904237e8b0:   000001fc5031e3a0 000001fc32d51420
+0x000000904237e8c0:   000001fc5031e3a0 000001fc32d51420 
+
+Instructions: (pc=0x0000000010014ed4)
+0x0000000010014eb4:   7c 24 20 00 75 15 48 8d 15 df 58 04 00 48 8b 4c
+0x0000000010014ec4:   24 40 e8 45 00 00 00 33 c0 eb 32 48 8b 44 24 20
+0x0000000010014ed4:   83 b8 38 01 00 00 00 74 1f 48 8b 44 24 20 44 8b
+0x0000000010014ee4:   80 38 01 00 00 48 8b 54 24 20 48 8b 4c 24 40 e8 
+
+
+Register to memory mapping:
+
+RAX=0x00000000500c9df0 is an unknown value
+RBX={method} {0x000001fc5031e3a8} 'getFileSystemListNative' '()[Lorg/hyperic/sigar/FileSystem;' in 'org/hyperic/sigar/Sigar'
+RCX=0x000001fc32d51620 is an unknown value
+RDX=0x000000904237e9a8 is pointing into the stack for thread: 0x000001fc32d51420
+RSP=0x000000904237e7d0 is pointing into the stack for thread: 0x000001fc32d51420
+RBP=0x000000904237e988 is pointing into the stack for thread: 0x000001fc32d51420
+RSI={method} {0x000001fc4d0e0470} '<init>' '()V' in 'java/lang/Object'
+RDI=0x0000000000141aa0 is an unknown value
+R8 =0x0000000000000032 is an unknown value
+R9 =
+[error occurred during error reporting (printing register info), id 0xc0000005]
+
+Stack: [0x0000009042340000,0x0000009042380000],  sp=0x000000904237e7d0,  free space=249k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  [sigar-amd64-winnt.dll+0x14ed4]
+C  [sigar-amd64-winnt.dll+0x21a81]
+C  0x000001fc348e9e0e
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+j  org.hyperic.sigar.Sigar.getFileSystemListNative()[Lorg/hyperic/sigar/FileSystem;+0
+j  org.hyperic.sigar.Sigar.getFileSystemList()[Lorg/hyperic/sigar/FileSystem;+1
+j  org.hyperic.sigar.Sigar.getFileSystemMap()Lorg/hyperic/sigar/FileSystemMap;+19
+j  org.apache.cassandra.utils.SigarLibrary.<init>()V+79
+j  org.apache.cassandra.utils.SigarLibrary.<clinit>()V+4
+v  ~StubRoutines::call_stub
+j  org.apache.cassandra.service.StartupChecks$7.execute()V+0
+j  org.apache.cassandra.service.StartupChecks.verify()V+30
+j  org.apache.cassandra.service.CassandraDaemon.setup()V+41
+j  org.apache.cassandra.service.CassandraDaemon.activate()V+46
+j  org.apache.cassandra.service.CassandraDaemon.main([Ljava/lang/String;)V+3
+v  ~StubRoutines::call_stub
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x000001fc4f003b40 JavaThread "EXPIRING-MAP-REAPER:1" daemon [_thread_blocked, id=2664, stack(0x0000009045100000,0x0000009045140000)]
+  0x000001fc4ef3ab70 JavaThread "RMI TCP Accept-0" daemon [_thread_in_native, id=27468, stack(0x00000090450c0000,0x0000009045100000)]
+  0x000001fc4ee57430 JavaThread "RMI TCP Accept-7199" daemon [_thread_in_native, id=31256, stack(0x0000009045080000,0x00000090450c0000)]
+  0x000001fc4eb22850 JavaThread "ScheduledTasks:1" daemon [_thread_blocked, id=20016, stack(0x0000009045040000,0x0000009045080000)]
+  0x000001fc4e888d10 JavaThread "AsyncAppender-Worker-ASYNCDEBUGLOG" daemon [_thread_blocked, id=27040, stack(0x0000009045000000,0x0000009045040000)]
+  0x000001fc4cda5120 JavaThread "Service Thread" daemon [_thread_blocked, id=21176, stack(0x0000009044ec0000,0x0000009044f00000)]
+  0x000001fc4ce1f2e0 JavaThread "C1 CompilerThread11" daemon [_thread_blocked, id=19956, stack(0x0000009044dc0000,0x0000009044ec0000)]
+  0x000001fc4ce1d900 JavaThread "C1 CompilerThread10" daemon [_thread_blocked, id=5932, stack(0x0000009044cc0000,0x0000009044dc0000)]
+  0x000001fc4ce1ee90 JavaThread "C1 CompilerThread9" daemon [_thread_blocked, id=19240, stack(0x0000009044bc0000,0x0000009044cc0000)]
+  0x000001fc4ce1ea40 JavaThread "C1 CompilerThread8" daemon [_thread_blocked, id=7616, stack(0x0000009044ac0000,0x0000009044bc0000)]
+  0x000001fc4ce0e9c0 JavaThread "C2 CompilerThread7" daemon [_thread_blocked, id=6696, stack(0x00000090449c0000,0x0000009044ac0000)]
+  0x000001fc4cda4d00 JavaThread "C2 CompilerThread6" daemon [_thread_blocked, id=26032, stack(0x00000090448c0000,0x00000090449c0000)]
+  0x000001fc4cda48e0 JavaThread "C2 CompilerThread5" daemon [_thread_blocked, id=29988, stack(0x00000090447c0000,0x00000090448c0000)]
+  0x000001fc4cdee5a0 JavaThread "C2 CompilerThread4" daemon [_thread_blocked, id=19696, stack(0x00000090446c0000,0x00000090447c0000)]
+  0x000001fc4cddc610 JavaThread "C2 CompilerThread3" daemon [_thread_blocked, id=29488, stack(0x00000090445c0000,0x00000090446c0000)]
+  0x000001fc4cddc1f0 JavaThread "C2 CompilerThread2" daemon [_thread_blocked, id=15852, stack(0x00000090444c0000,0x00000090445c0000)]
+  0x000001fc4cde7120 JavaThread "C2 CompilerThread1" daemon [_thread_blocked, id=30264, stack(0x00000090443c0000,0x00000090444c0000)]
+  0x000001fc4cddbdd0 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=26968, stack(0x00000090442c0000,0x00000090443c0000)]
+  0x000001fc4cc48ad0 JavaThread "Attach Listener" daemon [_thread_blocked, id=26384, stack(0x0000009044280000,0x00000090442c0000)]
+  0x000001fc4cc486f0 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=29384, stack(0x0000009044240000,0x0000009044280000)]
+  0x000001fc4cc48290 JavaThread "Surrogate Locker Thread (Concurrent GC)" daemon [_thread_blocked, id=28244, stack(0x0000009044200000,0x0000009044240000)]
+  0x000001fc4cc20100 JavaThread "Finalizer" daemon [_thread_blocked, id=604, stack(0x00000090423c0000,0x0000009042400000)]
+  0x000001fc4cbf64f0 JavaThread "Reference Handler" daemon [_thread_blocked, id=5768, stack(0x0000009042380000,0x00000090423c0000)]
+=>0x000001fc32d51420 JavaThread "main" [_thread_in_native, id=29604, stack(0x0000009042340000,0x0000009042380000)]
+
+Other Threads:
+  0x000001fc4cbf00e0 VMThread [stack: 0x0000009044100000,0x0000009044200000] [id=24440]
+  0x000001fc4cda5500 WatcherThread [stack: 0x0000009044f00000,0x0000009045000000] [id=29108]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+heap address: 0x00000006c0000000, size: 4096 MB, Compressed Oops mode: Zero based, Oop shift amount: 3
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 3
+Compressed class space size: 1073741824 Address: 0x00000007c0000000
+
+Heap:
+ par new generation   total 943744K, used 218117K [0x00000006c0000000, 0x0000000700000000, 0x0000000700000000)
+  eden space 838912K,  26% used [0x00000006c0000000, 0x00000006cd501660, 0x00000006f3340000)
+  from space 104832K,   0% used [0x00000006f3340000, 0x00000006f3340000, 0x00000006f99a0000)
+  to   space 104832K,   0% used [0x00000006f99a0000, 0x00000006f99a0000, 0x0000000700000000)
+ concurrent mark-sweep generation total 3145728K, used 0K [0x0000000700000000, 0x00000007c0000000, 0x00000007c0000000)
+ Metaspace       used 21471K, capacity 21750K, committed 22216K, reserved 1069056K
+  class space    used 2603K, capacity 2701K, committed 2764K, reserved 1048576K
+
+Card table byte_map: [0x000001fc43c90000,0x000001fc444a0000] byte_map_base: 0x000001fc40690000
+
+Marking Bits: (CMSBitMap*) 0x000001fc32df2178
+ Bits: [0x000001fc45ed0000, 0x000001fc48ed0000)
+
+Mod Union Table: (CMSBitMap*) 0x000001fc32df2238
+ Bits: [0x000001fc48ee0000, 0x000001fc48fa0000)
+
+Polling page: 0x000001fc33480000
+
+CodeCache: size=245760Kb used=8164Kb max_used=8164Kb free=237595Kb
+ bounds [0x000001fc348d0000, 0x000001fc350d0000, 0x000001fc438d0000]
+ total_blobs=2282 nmethods=1841 adapters=350
+ compilation: enabled
+
+Compilation events (10 events):
+Event: 2.974 Thread 0x000001fc4ce1f2e0 nmethod 1823 0x000001fc350a4a90 code [0x000001fc350a4c20, 0x000001fc350a4f70]
+Event: 2.974 Thread 0x000001fc4ce1f2e0 1824       1       java.util.concurrent.locks.ReentrantReadWriteLock::writeLock (5 bytes)
+Event: 2.974 Thread 0x000001fc4ce1f2e0 nmethod 1824 0x000001fc350a47d0 code [0x000001fc350a4920, 0x000001fc350a4a38]
+Event: 2.974 Thread 0x000001fc4ce1f2e0 1825       3       java.util.concurrent.locks.AbstractQueuedSynchronizer::release (33 bytes)
+Event: 2.974 Thread 0x000001fc4ce1f2e0 nmethod 1825 0x000001fc350a4250 code [0x000001fc350a43c0, 0x000001fc350a46e0]
+Event: 2.974 Thread 0x000001fc4ce1f2e0 1826       3       java.io.File::getCanonicalPath (31 bytes)
+Event: 2.974 Thread 0x000001fc4ce1f2e0 nmethod 1826 0x000001fc350a3bd0 code [0x000001fc350a3d80, 0x000001fc350a4120]
+Event: 2.975 Thread 0x000001fc4ce1ee90 nmethod 1822 0x000001fc350a3890 code [0x000001fc350a39e0, 0x000001fc350a3b38]
+Event: 2.982 Thread 0x000001fc4ce1f2e0 1827       3       ch.qos.logback.classic.util.LoggerNameUtil::getSeparatorIndexOf (53 bytes)
+Event: 2.982 Thread 0x000001fc4ce1f2e0 nmethod 1827 0x000001fc350a31d0 code [0x000001fc350a3360, 0x000001fc350a3780]
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (10 events):
+Event: 1.964 Thread 0x000001fc32d51420 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000001fc34e53878 method=java.util.jar.Manifest$FastInputStream.readLine([BII)I @ 87
+Event: 2.173 Thread 0x000001fc32d51420 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000001fc34daddec method=java.io.WinNTFileSystem.normalize(Ljava/lang/String;)Ljava/lang/String; @ 128
+Event: 2.193 Thread 0x000001fc32d51420 Uncommon trap: reason=loop_limit_check action=maybe_recompile pc=0x000001fc34eb4c50 method=java.math.BigInteger.implMulAdd([I[IIII)I @ 29
+Event: 2.611 Thread 0x000001fc32d51420 Uncommon trap: reason=loop_limit_check action=maybe_recompile pc=0x000001fc34c09c68 method=java.lang.String.lastIndexOf(II)I @ 26
+Event: 2.689 Thread 0x000001fc32d51420 Uncommon trap: reason=class_check action=maybe_recompile pc=0x000001fc34eb411c method=java.util.regex.Pattern$Curly.match(Ljava/util/regex/Matcher;ILjava/lang/CharSequence;)Z @ 19
+Event: 2.689 Thread 0x000001fc32d51420 Uncommon trap: reason=class_check action=maybe_recompile pc=0x000001fc34eb411c method=java.util.regex.Pattern$Curly.match(Ljava/util/regex/Matcher;ILjava/lang/CharSequence;)Z @ 19
+Event: 2.691 Thread 0x000001fc32d51420 Uncommon trap: reason=class_check action=maybe_recompile pc=0x000001fc34eb411c method=java.util.regex.Pattern$Curly.match(Ljava/util/regex/Matcher;ILjava/lang/CharSequence;)Z @ 19
+Event: 2.691 Thread 0x000001fc32d51420 Uncommon trap: reason=class_check action=maybe_recompile pc=0x000001fc34eb411c method=java.util.regex.Pattern$Curly.match(Ljava/util/regex/Matcher;ILjava/lang/CharSequence;)Z @ 19
+Event: 2.710 Thread 0x000001fc32d51420 Uncommon trap: reason=predicate action=maybe_recompile pc=0x000001fc34fdd02c method=java.lang.String.regionMatches(ZILjava/lang/String;II)Z @ 63
+Event: 2.852 Thread 0x000001fc32d51420 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000001fc34fe47a0 method=java.util.concurrent.ConcurrentHashMap.addCount(JI)V @ 172
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (10 events):
+Event: 2.502 Thread 0x000001fc32d51420 Exception <a 'java/lang/ClassNotFoundException': org/apache/cassandra/config/TransparentDataEncryptionOptionsCustomizer> (0x00000006c83929c8) thrown at [C:\jenkins\workspace\8-2-build-windows-x64-cygwin-sans-NAS\jdk8u481\2490\hotspot\src\share\vm\classfil
+Event: 2.503 Thread 0x000001fc32d51420 Exception <a 'java/lang/ClassNotFoundException': org/apache/cassandra/config/ReplicaFilteringProtectionOptionsBeanInfo> (0x00000006c83aa138) thrown at [C:\jenkins\workspace\8-2-build-windows-x64-cygwin-sans-NAS\jdk8u481\2490\hotspot\src\share\vm\classfile
+Event: 2.503 Thread 0x000001fc32d51420 Exception <a 'java/lang/ClassNotFoundException': org/apache/cassandra/config/ReplicaFilteringProtectionOptionsCustomizer> (0x00000006c83bb600) thrown at [C:\jenkins\workspace\8-2-build-windows-x64-cygwin-sans-NAS\jdk8u481\2490\hotspot\src\share\vm\classfi
+Event: 2.516 Thread 0x000001fc32d51420 Exception <a 'sun/nio/fs/WindowsException'> (0x00000006c8447738) thrown at [C:\jenkins\workspace\8-2-build-windows-x64-cygwin-sans-NAS\jdk8u481\2490\hotspot\src\share\vm\prims\jni.cpp, line 710]
+Event: 2.516 Thread 0x000001fc32d51420 Exception <a 'sun/nio/fs/WindowsException'> (0x00000006c84482b0) thrown at [C:\jenkins\workspace\8-2-build-windows-x64-cygwin-sans-NAS\jdk8u481\2490\hotspot\src\share\vm\prims\jni.cpp, line 710]
+Event: 2.517 Thread 0x000001fc32d51420 Exception <a 'sun/nio/fs/WindowsException'> (0x00000006c845a988) thrown at [C:\jenkins\workspace\8-2-build-windows-x64-cygwin-sans-NAS\jdk8u481\2490\hotspot\src\share\vm\prims\jni.cpp, line 710]
+Event: 2.517 Thread 0x000001fc32d51420 Exception <a 'sun/nio/fs/WindowsException'> (0x00000006c845aec8) thrown at [C:\jenkins\workspace\8-2-build-windows-x64-cygwin-sans-NAS\jdk8u481\2490\hotspot\src\share\vm\prims\jni.cpp, line 710]
+Event: 2.518 Thread 0x000001fc32d51420 Exception <a 'sun/nio/fs/WindowsException'> (0x00000006c845bcd8) thrown at [C:\jenkins\workspace\8-2-build-windows-x64-cygwin-sans-NAS\jdk8u481\2490\hotspot\src\share\vm\prims\jni.cpp, line 710]
+Event: 2.518 Thread 0x000001fc32d51420 Exception <a 'sun/nio/fs/WindowsException'> (0x00000006c845c218) thrown at [C:\jenkins\workspace\8-2-build-windows-x64-cygwin-sans-NAS\jdk8u481\2490\hotspot\src\share\vm\prims\jni.cpp, line 710]
+Event: 2.909 Thread 0x000001fc32d51420 Exception <a 'java/lang/ClassNotFoundException': javax/management/remote/rmi/RMIServerImpl_Skel> (0x00000006c9d718c0) thrown at [C:\jenkins\workspace\8-2-build-windows-x64-cygwin-sans-NAS\jdk8u481\2490\hotspot\src\share\vm\classfile\systemDictionary.cpp, 
+
+Events (10 events):
+Event: 3.001 loading class org/apache/cassandra/gms/GossipDigestAckVerbHandler
+Event: 3.001 loading class org/apache/cassandra/gms/GossipDigestAckVerbHandler done
+Event: 3.001 loading class org/hyperic/sigar/FileSystemMap
+Event: 3.001 loading class org/hyperic/sigar/FileSystemMap done
+Event: 3.001 loading class org/apache/cassandra/gms/GossipDigestAck2VerbHandler
+Event: 3.001 loading class org/apache/cassandra/gms/GossipDigestAck2VerbHandler done
+Event: 3.002 loading class org/hyperic/sigar/FileSystem
+Event: 3.002 loading class org/hyperic/sigar/FileSystem done
+Event: 3.002 loading class org/apache/cassandra/db/DefinitionsUpdateVerbHandler
+Event: 3.002 loading class org/apache/cassandra/db/DefinitionsUpdateVerbHandler done
+
+
+Dynamic libraries:
+0x00007ff770100000 - 0x00007ff77014f000 	C:\Program Files\Java\jre1.8.0_481\bin\java.exe
+0x00007ff9e9500000 - 0x00007ff9e9767000 	C:\WINDOWS\SYSTEM32\ntdll.dll
+0x00007ff9e7b60000 - 0x00007ff9e7c29000 	C:\WINDOWS\System32\KERNEL32.DLL
+0x00007ff9e6ea0000 - 0x00007ff9e7291000 	C:\WINDOWS\System32\KERNELBASE.dll
+0x00007ff9e7410000 - 0x00007ff9e74cb000 	C:\WINDOWS\System32\ADVAPI32.dll
+0x00007ff9e9110000 - 0x00007ff9e91b9000 	C:\WINDOWS\System32\msvcrt.dll
+0x00007ff9e72c0000 - 0x00007ff9e7367000 	C:\WINDOWS\System32\sechost.dll
+0x00007ff9e8f70000 - 0x00007ff9e9088000 	C:\WINDOWS\System32\RPCRT4.dll
+0x00007ff9e8590000 - 0x00007ff9e8755000 	C:\WINDOWS\System32\USER32.dll
+0x00007ff9e6600000 - 0x00007ff9e6627000 	C:\WINDOWS\System32\win32u.dll
+0x00007ff9e73e0000 - 0x00007ff9e740b000 	C:\WINDOWS\System32\GDI32.dll
+0x00007ff9e6180000 - 0x00007ff9e62ab000 	C:\WINDOWS\System32\gdi32full.dll
+0x00007ff9e5de0000 - 0x00007ff9e5e83000 	C:\WINDOWS\System32\msvcp_win.dll
+0x00007ff9e62b0000 - 0x00007ff9e63fb000 	C:\WINDOWS\System32\ucrtbase.dll
+0x00007ff9c8b00000 - 0x00007ff9c8d93000 	C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.26100.8037_none_3e092faae333b53b\COMCTL32.dll
+0x00007ff9e7790000 - 0x00007ff9e77c1000 	C:\WINDOWS\System32\IMM32.DLL
+0x00007ff9d5320000 - 0x00007ff9d533b000 	C:\Program Files\Java\jre1.8.0_481\bin\vcruntime140.dll
+0x00007ff9dcd30000 - 0x00007ff9dcd3c000 	C:\Program Files\Java\jre1.8.0_481\bin\vcruntime140_1.dll
+0x00007ff9c6fe0000 - 0x00007ff9c706e000 	C:\Program Files\Java\jre1.8.0_481\bin\msvcp140.dll
+0x00007ff90ce20000 - 0x00007ff90d6ca000 	C:\Program Files\Java\jre1.8.0_481\bin\server\jvm.dll
+0x00007ff9e72b0000 - 0x00007ff9e72b8000 	C:\WINDOWS\System32\PSAPI.DLL
+0x00007ff9dc3d0000 - 0x00007ff9dc3da000 	C:\WINDOWS\SYSTEM32\WSOCK32.dll
+0x00007ff9e8510000 - 0x00007ff9e8584000 	C:\WINDOWS\System32\WS2_32.dll
+0x00007ff9cf7c0000 - 0x00007ff9cf7f5000 	C:\WINDOWS\SYSTEM32\WINMM.dll
+0x00007ff9dc1f0000 - 0x00007ff9dc1fb000 	C:\WINDOWS\SYSTEM32\VERSION.dll
+0x00007ff9e4bf0000 - 0x00007ff9e4c0b000 	C:\WINDOWS\SYSTEM32\kernel.appcore.dll
+0x00007ff9d6b70000 - 0x00007ff9d6b80000 	C:\Program Files\Java\jre1.8.0_481\bin\verify.dll
+0x00007ff9d4850000 - 0x00007ff9d487b000 	C:\Program Files\Java\jre1.8.0_481\bin\java.dll
+0x00007ff9ceea0000 - 0x00007ff9ceed7000 	C:\Program Files\Java\jre1.8.0_481\bin\instrument.dll
+0x00007ff9d3f40000 - 0x00007ff9d3f58000 	C:\Program Files\Java\jre1.8.0_481\bin\zip.dll
+0x00007ff9e7cc0000 - 0x00007ff9e841f000 	C:\WINDOWS\System32\SHELL32.dll
+0x00007ff9e6400000 - 0x00007ff9e656a000 	C:\WINDOWS\System32\wintypes.dll
+0x00007ff9e77d0000 - 0x00007ff9e7b52000 	C:\WINDOWS\System32\combase.dll
+0x00007ff9e6630000 - 0x00007ff9e6e94000 	C:\WINDOWS\System32\windows.storage.dll
+0x00007ff9e93b0000 - 0x00007ff9e94a7000 	C:\WINDOWS\System32\SHCORE.dll
+0x00007ff9e7370000 - 0x00007ff9e73d7000 	C:\WINDOWS\System32\shlwapi.dll
+0x00007ff9e5d00000 - 0x00007ff9e5d29000 	C:\WINDOWS\SYSTEM32\profapi.dll
+0x00007ff9d29f0000 - 0x00007ff9d2a0c000 	C:\Program Files\Java\jre1.8.0_481\bin\net.dll
+0x00007ff9e5200000 - 0x00007ff9e526b000 	C:\WINDOWS\system32\mswsock.dll
+0x00007ff9aabc0000 - 0x00007ff9aabd8000 	C:\WINDOWS\system32\napinsp.dll
+0x00007ff9e46e0000 - 0x00007ff9e480a000 	C:\WINDOWS\SYSTEM32\DNSAPI.dll
+0x00007ff9e46a0000 - 0x00007ff9e46d3000 	C:\WINDOWS\SYSTEM32\IPHLPAPI.DLL
+0x00007ff9e87b0000 - 0x00007ff9e87ba000 	C:\WINDOWS\System32\NSI.dll
+0x00007ff9aaba0000 - 0x00007ff9aabb2000 	C:\WINDOWS\System32\winrnr.dll
+0x00007ff9aab50000 - 0x00007ff9aab72000 	C:\WINDOWS\system32\nlansp_c.dll
+0x00007ff9aab30000 - 0x00007ff9aab46000 	C:\WINDOWS\system32\wshbth.dll
+0x00007ff9dfb60000 - 0x00007ff9dfbe6000 	C:\WINDOWS\System32\fwpuclnt.dll
+0x00007ff9dcb20000 - 0x00007ff9dcb2b000 	C:\Windows\System32\rasadhlp.dll
+0x00007ff9d4aa0000 - 0x00007ff9d4aad000 	C:\Program Files\Java\jre1.8.0_481\bin\management.dll
+0x00007ff9d1120000 - 0x00007ff9d1133000 	C:\Program Files\Java\jre1.8.0_481\bin\nio.dll
+0x00007ff9cef20000 - 0x00007ff9cef45000 	C:\Program Files\Java\jre1.8.0_481\bin\sunec.dll
+0x00007ff9de200000 - 0x00007ff9de21d000 	C:\WINDOWS\SYSTEM32\dhcpcsvc6.DLL
+0x00007ff9de040000 - 0x00007ff9de063000 	C:\WINDOWS\SYSTEM32\dhcpcsvc.DLL
+0x00007ff9e54e0000 - 0x00007ff9e54fb000 	C:\WINDOWS\SYSTEM32\CRYPTSP.dll
+0x00007ff9e4c10000 - 0x00007ff9e4c49000 	C:\WINDOWS\system32\rsaenh.dll
+0x00007ff9e52b0000 - 0x00007ff9e52e2000 	C:\WINDOWS\SYSTEM32\USERENV.dll
+0x00007ff9e5cd0000 - 0x00007ff9e5cfa000 	C:\WINDOWS\SYSTEM32\bcrypt.dll
+0x00007ff9e60d0000 - 0x00007ff9e6175000 	C:\WINDOWS\System32\bcryptprimitives.dll
+0x00007ff9e5500000 - 0x00007ff9e550c000 	C:\WINDOWS\SYSTEM32\CRYPTBASE.dll
+0x0000000066f40000 - 0x0000000066f6d000 	C:\Users\Nitro V16\AppData\Local\Temp\liblz4-java3884499210616526365.so
+0x00007ff9cee70000 - 0x00007ff9cee95000 	C:\Users\Nitro V16\AppData\Local\Temp\jna--1992519727\jna6541339515341503323.dll
+0x0000000053d30000 - 0x0000000053e02000 	C:\WINDOWS\SYSTEM32\MSVCR100.dll
+0x0000000010000000 - 0x0000000010070000 	C:\Cassandra\apache-cassandra-3.11.11\lib\sigar-bin\sigar-amd64-winnt.dll
+0x00007ff9e8dd0000 - 0x00007ff9e8f65000 	C:\WINDOWS\System32\ole32.dll
+0x00007ff9c6ee0000 - 0x00007ff9c6f36000 	C:\WINDOWS\SYSTEM32\pdh.dll
+0x00007ff9c4de0000 - 0x00007ff9c4dfa000 	C:\WINDOWS\SYSTEM32\NETAPI32.dll
+0x00007ff9e8430000 - 0x00007ff9e8507000 	C:\WINDOWS\System32\OLEAUT32.dll
+0x00007ff9e44e0000 - 0x00007ff9e44ed000 	C:\WINDOWS\SYSTEM32\NETUTILS.DLL
+0x00007ff9c7510000 - 0x00007ff9c7539000 	C:\WINDOWS\SYSTEM32\SRVCLI.DLL
+0x00007ff9e3a90000 - 0x00007ff9e3cd2000 	C:\WINDOWS\SYSTEM32\dbghelp.dll
+
+VM Arguments:
+jvm_args: -Dcassandra -Dlogback.configurationFile=logback.xml -Dcassandra.logdir=C:\Cassandra\apache-cassandra-3.11.11\logs -Dcassandra.storagedir=C:\Cassandra\apache-cassandra-3.11.11\data -Xloggc:C:\Cassandra\apache-cassandra-3.11.11/logs/gc.log -ea -XX:+UseThreadPriorities -XX:ThreadPriorityPolicy=42 -XX:+HeapDumpOnOutOfMemoryError -Xss256k -XX:StringTableSize=1000003 -XX:+AlwaysPreTouch -XX:-UseBiasedLocking -XX:+UseTLAB -XX:+ResizeTLAB -XX:+UseNUMA -XX:+PerfDisableSharedMem -Djava.net.preferIPv4Stack=true -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled -XX:SurvivorRatio=8 -XX:MaxTenuringThreshold=1 -XX:CMSInitiatingOccupancyFraction=75 -XX:+UseCMSInitiatingOccupancyOnly -XX:CMSWaitDuration=10000 -XX:+CMSParallelInitialMarkEnabled -XX:+CMSEdenChunksRecordAlways -XX:+CMSClassUnloadingEnabled -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintHeapAtGC -XX:+PrintTenuringDistribution -XX:+PrintGCApplicationStoppedTime -XX:+PrintPromotionFailure -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=10 -XX:GCLogFileSize=10M -Xms4096M -Xmx4096M -Xmn1024M -XX:+UseCondCardMark -Djava.library.path=C:\Cassandra\apache-cassandra-3.11.11\lib\sigar-bin -XX:CompileCommandFile=C:\Cassandra\apache-cassandra-3.11.11\conf\hotspot_compiler -javaagent:C:\Cassandra\apache-cassandra-3.11.11\lib\jamm-0.3.0.jar -XX:OnOutOfMemoryError=taskkill /F /PID %p -Dcassandra.jmx.local.port=7199 -Dcassandra-foreground=yes 
+java_command: org.apache.cassandra.service.CassandraDaemon
+java_class_path (initial): C:\Cassandra\apache-cassandra-3.11.11\conf;C:/Cassandra/apache-cassandra-3.11.11/lib/airline-0.6.jar;C:/Cassandra/apache-cassandra-3.11.11/lib/antlr-runtime-3.5.2.jar;C:/Cassandra/apache-cassandra-3.11.11/lib/apache-cassandra-3.11.11.jar;C:/Cassandra/apache-cassandra-3.11.11/lib/apache-cassandra-thrift-3.11.11.jar;C:/Cassandra/apache-cassandra-3.11.11/lib/asm-5.0.4.jar;C:/Cassandra/apache-cassandra-3.11.11/lib/caffeine-2.2.6.jar;C:/Cassandra/apache-cassandra-3.11.11/lib/cassandra-driver-core-3.0.1-shaded.jar;C:/Cassandra/apache-cassandra-3.11.11/lib/commons-cli-1.1.jar;C:/Cassandra/apache-cassandra-3.11.11/lib/commons-codec-1.9.jar;C:/Cassandra/apache-cassandra-3.11.11/lib/commons-lang3-3.1.jar;C:/Cassandra/apache-cassandra-3.11.11/lib/commons-math3-3.2.jar;C:/Cassandra/apache-cassandra-3.11.11/lib/compress-lzf-0.8.4.jar;C:/Cassandra/apache-cassandra-3.11.11/lib/concurrent-trees-2.4.0.jar;C:/Cassandra/apache-cassandra-3.11.11/lib/concurrentlinkedhashmap-lru-1.4.jar;C:/Cassandra/apache-cassandra-3.11.11/lib/disruptor-3.0.1.jar;C:/Cassandra/apache-cassandra-3.11.11/lib/ecj-4.4.2.jar;C:/Cassandra/apache-cassandra-3.11.11/lib/guava-18.0.jar;C:/Cassandra/apache-cassandra-3.11.11/lib/HdrHistogram-2.1.9.jar;C:/Cassandra/apache-cassandra-3.11.11/lib/high-scale-lib-1.0.6.jar;C:/Cassandra/apache-cassandra-3.11.11/lib/hppc-0.5.4.jar;C:/Cassandra/apache-cassandra-3.11.11/lib/jackson-annotations-2.9.10.jar;C:/Cassandra/apache-cassandra-3.11.11/lib/jackson-core-2.9.10.jar;C:/Cassandra/apache-cassandra-3.11.11/lib/jackson-databind-2.9.10.8.jar;C:/Cassandra/apache-cassandra-3.11.11/lib/jamm-0.3.0.jar;C:/Cassandra/apache-cassandra-3.11.11/lib/javax.inject-1.jar;C:/Cassandra/apache-cassandra-3.11.11/lib/jbcrypt-0.3m.jar;C:/Cassandra/apache-cassandra-3.11.11/lib/jcl-over-slf4j-1.7.7.jar;C:/Cassandra/apache-cassandra-3.11.11/lib/jctools-core-1.2.1.jar;C:/Cassandra/apache-cassandra-3.11.11/lib/jflex-1.6.0.jar;C:/Cassandra/apache-cassandra-3.11.11/lib/jna-4.2
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+PATH=C:\Program Files\Java\jre1.8.0_481\bin;%JAVA_HOME%\bin;C:\WINDOWS\System32\Wbem;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\MinGW\bin;C:\Program Files\Git\bin;C:\Program Files\nodejs\;C:\Program Files\dotnet\;C:\Program Files\NVIDIA Corporation\NVIDIA App\NvDLISR;C:\Program Files\PostgreSQL\16\bin;C:\Users\Nitro V16\AppData\Local\Programs\Python\Python313\Scripts\;C:\Users\Nitro V16\AppData\Local\Programs\Python\Python313\;C:\Users\Nitro V16\AppData\Local\Programs\Python\Launcher\;C:\Users\Nitro V16\AppData\Local\Microsoft\WindowsApps;C:\Users\Nitro V16\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Nitro V16\AppData\Roaming\npm;C:\Users\Nitro V16\AppData\Local\Programs\Antigravity\bin;C:\Users\Nitro V16\AppData\Local\Programs\Ollama;C:\Program Files\PostgreSQL\16\bin;C:\Program Files\PostgreSQL\16\bin;C:\Program Files\Docker\Docker\resources\bin;
+USERNAME=Nitro V16
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 183 Stepping 1, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 11 , 64 bit Build 26100 (10.0.26100.7920)
+
+CPU:total 24 (initial active 24) (12 cores per cpu, 2 threads per core) family 6 model 183 stepping 1, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, avx2, aes, clmul, erms, 3dnowpref, lzcnt, ht, tsc, tscinvbit, bmi1, bmi2, adx
+
+Memory: 4k page, physical 16474168k(1081184k free), swap 29400020k(1456212k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (25.481-b10) for windows-amd64 JRE (1.8.0_481-b10), built on Dec 18 2025 12:18:00 by "java_re" with MS VC++ 17.6 (VS2022)
+
+time: Mon Apr 13 15:15:45 2026
+timezone: India Standard Time
+elapsed time: 3.035798 seconds (0d 0h 0m 3s)
+

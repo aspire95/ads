@@ -1,0 +1,142 @@
+<div class="min-h-screen bg-slate-50 dark:bg-slate-900 py-8 px-4 sm:px-6 lg:px-8 flex items-start justify-center font-sans transition-colors duration-300">
+  <div class="w-full max-w-3xl mt-4" *ngIf="!completed">
+    <!-- Header Area -->
+    <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-6 flex justify-between items-center mb-6">
+      <div>
+        <h2 class="text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">{{ exam?.title }}</h2>
+        <div class="mt-1 flex flex-wrap items-center gap-2">
+           <span class="inline-flex items-center rounded-md bg-indigo-50 dark:bg-indigo-900/40 px-2 py-1 text-xs font-semibold text-indigo-700 dark:text-indigo-300 ring-1 ring-inset ring-indigo-700/10 dark:ring-indigo-400/20">Question {{ currentIndex + 1 }} of {{ questions.length }}</span>
+           <span class="lg:hidden inline-flex items-center rounded-md bg-slate-100 dark:bg-slate-700 px-2 py-1 text-xs font-extrabold text-slate-800 dark:text-slate-200 ring-1 ring-inset ring-slate-300 dark:ring-slate-600 font-mono" [ngClass]="{'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/30': timeLeft <= 300}">Time: {{ formattedTime }}</span>
+        </div>
+      </div>
+      <div>
+        <button (click)="toggleDarkMode()" class="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors" title="Toggle Theme">
+          <svg *ngIf="!isDarkMode" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+          <svg *ngIf="isDarkMode" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <div class="flex flex-col lg:flex-row gap-6 relative">
+      <!-- Main Content Left -->
+      <div class="flex-1">
+        <!-- Progress Bar -->
+        <div class="w-full bg-slate-100 dark:bg-slate-700 h-1.5 border border-slate-200 dark:border-slate-800 rounded-full mb-6 overflow-hidden">
+          <div class="bg-indigo-600 h-full transition-all duration-300 ease-in-out" [style.width.%]="((currentIndex) / questions.length) * 100"></div>
+        </div>
+
+        <!-- Question Area -->
+        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-6 sm:p-10" *ngIf="questions.length > 0">
+      <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-6 leading-relaxed">{{ questions[currentIndex]?.question_text }}</h3>
+      
+      <div *ngIf="questions[currentIndex]?.image_url" class="mb-8 rounded-xl overflow-hidden border border-slate-200 flex justify-center bg-slate-50">
+         <img [src]="questions[currentIndex]?.image_url" class="max-w-full max-h-80 object-contain">
+      </div>
+
+      <div class="space-y-3 mt-8">
+        <div *ngFor="let opt of questions[currentIndex]?.options">
+          <label class="relative flex cursor-pointer rounded-xl border p-4 shadow-sm focus:outline-none transition-all duration-200 group"
+                 [ngClass]="answers[questions[currentIndex]?.id] === opt.id ? 'bg-indigo-50 dark:bg-indigo-900/20 border-indigo-600 ring-1 ring-indigo-600' : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-indigo-300 dark:hover:border-indigo-500 hover:bg-slate-50 dark:hover:bg-slate-700/50'">
+            <input type="radio" [name]="'q'+questions[currentIndex]?.id" [value]="opt.id" [(ngModel)]="answers[questions[currentIndex]?.id]" class="sr-only">
+            <span class="flex items-center w-full">
+               <span class="flex items-center justify-center w-8 h-8 rounded-md mr-4 text-sm font-bold transition-colors border dark:border-slate-600"
+                     [ngClass]="answers[questions[currentIndex]?.id] === opt.id ? 'bg-indigo-600 dark:bg-indigo-500 text-white border-transparent' : 'bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 group-hover:bg-indigo-100 dark:group-hover:bg-slate-600 group-hover:text-indigo-600 dark:group-hover:text-white'">
+                 {{ opt.id | uppercase }}
+               </span>
+               <span class="block text-base font-medium" [ngClass]="answers[questions[currentIndex]?.id] === opt.id ? 'text-indigo-900 dark:text-indigo-100' : 'text-slate-700 dark:text-slate-300'">{{ opt.text }}</span>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Navigation Footer -->
+      <div class="mt-10 pt-6 border-t border-slate-100 dark:border-slate-700 flex items-center justify-between">
+        <button (click)="prev()" [disabled]="currentIndex === 0" class="inline-flex items-center px-4 py-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-lg text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 shadow-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-slate-400 dark:text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          Previous
+        </button>
+        
+        <button *ngIf="currentIndex < questions.length - 1" (click)="next()" class="inline-flex items-center rounded-lg bg-indigo-600 px-6 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-all">
+          Next
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+        
+        <button *ngIf="currentIndex === questions.length - 1 || questions.length === 0" (click)="finishExam()" class="inline-flex items-center rounded-lg bg-emerald-600 px-6 py-2.5 text-sm font-bold text-white shadow-md hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600 transition-all active:scale-95">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+          </svg>
+          Submit Exam
+        </button>
+      </div>
+    </div>
+    
+        <!-- Empty State (No Questions) -->
+        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-12 text-center" *ngIf="questions.length === 0">
+           <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-16 w-16 text-slate-300 dark:text-slate-600 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+           </svg>
+           <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">No Questions Available</h3>
+           <p class="text-slate-500 dark:text-slate-400 mb-6">The teacher has not added any questions to this exam yet.</p>
+           <button (click)="finishExam()" class="inline-flex items-center rounded-lg bg-indigo-600 px-6 py-2.5 text-sm font-bold text-white shadow-md hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-all active:scale-95">
+             Return to Dashboard
+           </button>
+        </div>
+      </div>
+
+  <!-- Side Panel: Timer -->
+  <div class="hidden lg:block w-72 shrink-0">
+     <div class="sticky top-8 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-6 text-center transition-colors">
+       <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-indigo-50 dark:bg-indigo-900/30 mb-4">
+         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+         </svg>
+       </div>
+       <h3 class="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1">Time Remaining</h3>
+       <div class="text-4xl font-extrabold text-slate-900 dark:text-white tracking-wider font-mono" [ngClass]="{'text-red-500 dark:text-red-400': timeLeft <= 300}">
+         {{ formattedTime }}
+       </div>
+       <div *ngIf="timeLeft <= 300" class="mt-4 inline-flex items-center px-3 py-1 bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 text-xs font-bold rounded-full animate-pulse border border-red-200 dark:border-red-800">
+         Hurry Up!
+       </div>
+     </div>
+  </div>
+</div>
+
+
+  <div *ngIf="completed" class="w-full max-w-lg mt-12 bg-white dark:bg-slate-800 rounded-3xl shadow-xl border border-slate-200 dark:border-slate-700 p-8 sm:p-12 text-center transform transition-all">
+    <div class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-900/30 mb-6">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-emerald-600 dark:text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    </div>
+    <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white mb-2">Exam Submitted!</h2>
+    <p class="text-slate-500 dark:text-slate-400 mb-8">You have successfully submitted your answers.</p>
+    
+    <div *ngIf="questions.length > 0" class="bg-slate-50 dark:bg-slate-900/50 rounded-2xl p-6 border border-slate-100 dark:border-slate-700/50 mb-8 inset-shadow-sm">
+      <div class="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-1">Your Final Score</div>
+      <div class="flex items-baseline justify-center gap-2">
+        <span class="text-5xl font-extrabold text-slate-900 dark:text-white">{{ score }}</span>
+        <span class="text-xl font-medium text-slate-400 dark:text-slate-500">/ {{ questions.length }}</span>
+      </div>
+      <div class="mt-4 inline-flex items-center rounded-full px-3 py-1 text-sm font-semibold"
+           [ngClass]="(score / (questions.length || 1)) >= 0.4 ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-400' : 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-400'">
+        {{ (score / (questions.length || 1) * 100) | number:'1.0-0' }}% Score
+      </div>
+    </div>
+    
+    <button routerLink="/dashboard" class="w-full inline-flex justify-center items-center rounded-xl bg-slate-900 dark:bg-indigo-600 px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 dark:hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600 dark:focus-visible:outline-indigo-600 transition-all">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+      </svg>
+      Return to Dashboard
+    </button>
+  </div>
+</div>

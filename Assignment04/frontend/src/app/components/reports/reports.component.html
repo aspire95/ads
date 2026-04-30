@@ -1,0 +1,89 @@
+<div class="min-h-screen bg-slate-50 py-8 font-sans">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="mb-8 flex items-center justify-between">
+      <div>
+        <a routerLink="/dashboard" class="inline-flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-500 mb-2 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Back to Dashboard
+        </a>
+        <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">System Reports</h2>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+      <!-- Toolbar -->
+      <div class="px-6 py-4 border-b border-slate-200 bg-slate-50/50 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div class="flex items-center gap-2">
+           <span class="text-sm font-semibold text-slate-700">Total Records:</span>
+           <span class="inline-flex items-center rounded-md bg-indigo-50 px-2.5 py-1 text-xs font-bold text-indigo-700 ring-1 ring-inset ring-indigo-700/10">{{ results.length }}</span>
+        </div>
+        <div class="flex items-center gap-3 w-full sm:w-auto">
+          <div class="relative flex-1 sm:w-64">
+             <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+               </svg>
+             </div>
+             <input type="text" [(ngModel)]="filterText" placeholder="Search students or exams..." class="block w-full rounded-xl border-0 py-2 pl-10 pr-3 text-slate-900 shadow-sm ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 transition-colors">
+          </div>
+          <button (click)="exportData()" class="inline-flex items-center rounded-xl bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm ring-1 ring-inset ring-slate-300 hover:bg-slate-50 transition-all shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            Export CSV
+          </button>
+        </div>
+      </div>
+
+      <!-- Table Area -->
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-slate-200">
+          <thead>
+            <tr class="bg-white">
+              <th scope="col" class="py-3.5 pl-6 pr-3 text-left text-xs font-bold text-slate-900 uppercase tracking-wider">Student</th>
+              <th scope="col" class="px-3 py-3.5 text-left text-xs font-bold text-slate-900 uppercase tracking-wider">Exam Title</th>
+              <th scope="col" class="px-3 py-3.5 text-center text-xs font-bold text-slate-900 uppercase tracking-wider">Score</th>
+              <th scope="col" class="px-3 py-3.5 text-center text-xs font-bold text-slate-900 uppercase tracking-wider">%</th>
+              <th scope="col" class="px-3 py-3.5 text-left text-xs font-bold text-slate-900 uppercase tracking-wider">Date Taken</th>
+              <th scope="col" class="py-3.5 pl-3 pr-6 text-center text-xs font-bold text-slate-900 uppercase tracking-wider">Result</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 bg-white">
+            <tr *ngFor="let r of filteredResults" class="hover:bg-slate-50/80 transition-colors">
+              <td class="whitespace-nowrap py-4 pl-6 pr-3 text-sm font-bold text-slate-900">
+                <div class="flex items-center gap-3">
+                   <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 font-bold text-xs">{{ r.username.charAt(0).toUpperCase() }}</div>
+                   {{ r.username }}
+                </div>
+              </td>
+              <td class="whitespace-nowrap px-3 py-4 text-sm text-slate-600 font-medium">{{ r.exam_title }}</td>
+              <td class="whitespace-nowrap px-3 py-4 text-sm text-center">
+                 <span class="inline-flex items-center rounded-md bg-slate-100 px-2 py-1 text-xs font-medium text-slate-700">{{ r.score }} / {{ r.total_questions }}</span>
+              </td>
+              <td class="whitespace-nowrap px-3 py-4 text-sm text-center font-bold text-slate-700">
+                {{ (r.score / r.total_questions * 100) | number:'1.0-1' }}%
+              </td>
+              <td class="whitespace-nowrap px-3 py-4 text-sm text-slate-500">{{ r.date_taken | date:'mediumDate' }}</td>
+              <td class="whitespace-nowrap py-4 pl-3 pr-6 text-center">
+                <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-bold"
+                      [ngClass]="(r.score / r.total_questions) >= 0.4 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'">
+                  {{ (r.score / r.total_questions) >= 0.4 ? 'PASS' : 'FAIL' }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <div *ngIf="filteredResults.length === 0" class="py-16 text-center bg-white border-t border-slate-100">
+           <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-12 w-12 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+           </svg>
+           <h3 class="mt-2 text-sm font-medium text-slate-900">No results found</h3>
+           <p class="mt-1 text-sm text-slate-500">Try adjusting your search filter.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

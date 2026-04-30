@@ -1,0 +1,25 @@
+<div class="flex-center">
+  <div class="glass-card animate-fade-in" style="width: 100%; max-width: 400px;">
+    <h2 style="text-align: center; margin-bottom: 2rem;">Welcome Back</h2>
+    
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" [(ngModel)]="username" name="username" placeholder="Enter username" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" [(ngModel)]="password" name="password" placeholder="Enter password" required>
+      </div>
+
+      <div *ngIf="errorMsg" style="color: var(--danger-color); margin-bottom: 1rem; text-align: center; font-size: 0.9rem;">
+        {{ errorMsg }}
+      </div>
+
+      <button type="submit" class="btn-primary" [disabled]="loading">
+        {{ loading ? 'Signing In...' : 'Sign In' }}
+      </button>
+    </form>
+  </div>
+</div>

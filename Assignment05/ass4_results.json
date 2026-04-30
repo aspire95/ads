@@ -1,0 +1,24 @@
+{
+  "static": {
+    "requests": {
+      "mean": 40129.46
+    },
+    "latency": {
+      "mean": 0.01
+    },
+    "throughput": {
+      "mean": 17778129.46
+    }
+  },
+  "protected": {
+    "requests": {
+      "mean": 5116
+    },
+    "latency": {
+      "mean": 1.39
+    },
+    "throughput": {
+      "mean": 4143718.4
+    }
+  }
+}

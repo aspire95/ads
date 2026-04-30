@@ -1,0 +1,84 @@
+<div class="student-container">
+  <div class="card form-card">
+    <div class="card-header">
+      <h2>Student Registration</h2>
+      <p>Enter student details below</p>
+    </div>
+    
+    <form (ngSubmit)="onSubmit()" class="student-form">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input 
+          type="text" 
+          id="name" 
+          [(ngModel)]="formData.name" 
+          name="name" 
+          placeholder="e.g. John Doe"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="prn">PRN Number</label>
+        <input 
+          type="text" 
+          id="prn" 
+          [(ngModel)]="formData.prn" 
+          name="prn" 
+          placeholder="e.g. 23510014"
+          required
+        >
+      </div>
+
+      <button type="submit" [disabled]="!formData.name || !formData.prn || isLoading" class="btn-submit">
+        {{ isLoading ? 'Saving...' : (isEditing ? 'Update Student' : 'Register Student') }}
+      </button>
+      <button *ngIf="isEditing" type="button" (click)="cancelEdit()" class="btn-cancel">
+        Cancel
+      </button>
+    </form>
+  </div>
+
+  <div class="card list-card">
+    <div class="card-header">
+      <h2>Registered Students</h2>
+      <p>Total: {{ students.length }}</p>
+    </div>
+    
+    <div class="table-container">
+      <table class="student-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>PRN</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let student of students">
+            <td>#{{ student.id }}</td>
+            <td>
+              <div class="student-name">
+                <span class="avatar">{{ student.name.charAt(0) }}</span>
+                {{ student.name }}
+              </div>
+            </td>
+            <td class="prn-cell">{{ student.prn }}</td>
+            <td class="actions-cell">
+              <button class="btn-icon btn-edit" (click)="editStudent(student)" title="Edit">
+                <i class="edit-icon">✎</i>
+              </button>
+              <button class="btn-icon btn-delete" (click)="deleteStudent(student.id)" title="Delete">
+                <i class="delete-icon">🗑</i>
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="students.length === 0" class="empty-row">
+             <td colspan="4">No students registered yet.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
